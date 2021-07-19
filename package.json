@@ -14,6 +14,7 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^7.0.1",
+    "lint-staged": "^11.0.1",
     "prettier": "2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -23,18 +24,20 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:nowatch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "postinstall": "husky install",
     "lint": "eslint src/*",
-    "lintfix": "eslint src/* --fix",
-    "lintcheck": "eslint src/* --max-warnings 0",
-    "prettier": "prettier --write",
-    "prettiercheck": "prettier --check"
+    "lint:fix": "eslint src/* --fix",
+    "lint:check": "eslint src/* --max-warnings 0",
+    "prettier": "prettier --write src",
+    "prettier:check": "prettier --check src"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit\""
-    }
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "yarn lint:check",
+      "yarn prettier"
+    ]
   },
   "browserslist": {
     "production": [
